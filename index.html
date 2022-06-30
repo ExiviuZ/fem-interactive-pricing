@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Interactive pricing component</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="container__introductory">
+        <h1>Simple, traffic-based pricing</h1>
+        <p>Sign-up for our 30-day trial. No credit card required.</p>
+      </div>
+      <section class="container__card">
+        <div class="container__card-top">
+          <div class="container__pageview-price">
+            <span class="container__pageview">100k Pageviews</span>
+            <span class="container__price"
+              ><span>$<span class="container__dynamic-price">16.00</span></span>
+              / <span class="container__dynamic-type">month</span></span
+            >
+          </div>
+          <div class="container__range-container">
+            <input
+              type="range"
+              min="0"
+              max="32"
+              step="4"
+              class="container__range"
+              name=""
+              oninput="showRangeValue()"
+            />
+            <div class="container__selector">
+              <div class="container__select-btn"></div>
+            </div>
+            <div class="container__range-progress"></div>
+          </div>
+
+          <div class="container__billing">
+            <span>Monthly Billing</span>
+            <label class="switch">
+              <input type="checkbox" class="check-billing" />
+              <span class="slider round"></span>
+            </label>
+            <span>Yearly Billing</span>
+            <span class="container__discount">
+              <span>25% discount</span> <span>-25%</span>
+            </span>
+          </div>
+        </div>
+        <hr class="container__card-rule" />
+        <div class="container__card-bottom">
+          <ul class="container__list">
+            <li>
+              <img src="images/icon-check.svg" alt="" /> Unlimited websites
+            </li>
+            <li>
+              <img src="images/icon-check.svg" alt="" /> 100% data ownership
+            </li>
+            <li><img src="images/icon-check.svg" alt="" /> Email reports</li>
+          </ul>
+          <button class="container__button">Start my trial</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>. -->
+    <!-- </div> -->
+    <script>
+      const checkBox = document.querySelector(".check-billing");
+      const dynamicPrice = document.querySelector(".container__dynamic-price");
+      const dynamicPageview = document.querySelector(".container__pageview");
+      const dyanamicType = document.querySelector(".container__dynamic-type");
+
+      const range = document.querySelector(".container__range");
+      const rangeProgress = document.querySelector(
+        ".container__range-progress"
+      );
+      const selector = document.querySelector(".container__selector");
+
+      checkBox.addEventListener("click", () => {
+        showRangeValue();
+      });
+      function showRangeValue() {
+        if (checkBox.checked) {
+          checkPageView();
+          dynamicPrice.innerText = (
+            range.value * 12 -
+            range.value * 12 * 0.25
+          ).toFixed(2);
+          dyanamicType.innerText = "Year";
+        } else {
+          checkPageView();
+          dynamicPrice.innerText = Number(range.value).toFixed(2);
+          dyanamicType.innerText = "Month";
+        }
+      }
+
+      function checkPageView() {
+        if (range.value == 0) {
+          dynamicPageview.innerText = "NO PAGEVIEWS";
+          selector.style.left = `0%`;
+          rangeProgress.style.width = "0%";
+        }
+        if (range.value == 4) {
+          dynamicPageview.innerText = "25K PAGEVIEWS";
+          selector.style.left = `12.5%`;
+          rangeProgress.style.width = "12.5%";
+        }
+        if (range.value == 8) {
+          dynamicPageview.innerText = "50K PAGEVIEWS";
+          selector.style.left = `25%`;
+          rangeProgress.style.width = "25%";
+        }
+        if (range.value == 12) {
+          dynamicPageview.innerText = "75K PAGEVIEWS";
+          selector.style.left = `37.5%`;
+          rangeProgress.style.width = "37.5%";
+        }
+        if (range.value == 16) {
+          dynamicPageview.innerText = "100K PAGEVIEWS";
+          selector.style.left = `50%`;
+          rangeProgress.style.width = "50%";
+        }
+        if (range.value == 20) {
+          dynamicPageview.innerText = "125K PAGEVIEWS";
+          selector.style.left = `62.5%`;
+          rangeProgress.style.width = "62.5%";
+        }
+        if (range.value == 24) {
+          dynamicPageview.innerText = "150K PAGEVIEWS";
+          selector.style.left = `75%`;
+          rangeProgress.style.width = `75%`;
+        }
+        if (range.value == 28) {
+          dynamicPageview.innerText = "175K PAGEVIEWS";
+          selector.style.left = `87.5%`;
+          rangeProgress.style.width = `87.5%`;
+        }
+        if (range.value == 32) {
+          dynamicPageview.innerText = "250K PAGEVIEWS";
+          selector.style.left = `100%`;
+          rangeProgress.style.width = "100%";
+        }
+      }
+    </script>
+  </body>
+</html>
